@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string.h>
 #include <iomanip>
 #include "PhoneBook.hpp"
 
@@ -28,7 +29,18 @@ void PhoneBook::AddContact()
 }
 std::string PhoneBook::FormatField(const std::string &str)
 {
-    if(s)
+    
+    std::string tempStr;
+    
+    if(str.length() <= 10)
+    {
+        return str;
+    }
+    else
+    {
+        tempStr = str.substr(0, 9) + '.';
+        return tempStr;
+    }
 }
 
 void PhoneBook::Search()
@@ -39,13 +51,18 @@ void PhoneBook::Search()
     }
     else
     {
+        std::cout << std::setw(10) << "Index" << "|" <<
+        std::setw(10) << "First Name" << "|" << 
+        std::setw(10) << "Last Name" << "|" <<
+        std::setw(10) << "Nick Name" << "|" << std::endl;
         int i = 0;
         while(i < count)
         {
-            std::cout << i << std::endl;
-            std::cout << contactsArray[i].getFirstName();
+            std::cout << std::setw(10) << i << "|" << std::setw(10) << 
+            FormatField(contactsArray[i].getFirstName()) <<  "|" << std::setw(10) <<
+            FormatField(contactsArray[i].getLastName()) << "|" << std::setw(10) <<
+            FormatField(contactsArray[i].getNickName()) << "|" << std::endl;
             i++;
-
         }
     }
 }

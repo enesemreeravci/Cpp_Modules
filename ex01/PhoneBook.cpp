@@ -10,6 +10,7 @@ PhoneBook::PhoneBook() : count(0), oldestIndex(0)
 PhoneBook::~PhoneBook()
 {
 }
+// explain here
 void PhoneBook::AddContact()
 {
     Contact temp;

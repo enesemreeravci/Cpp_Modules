@@ -5,24 +5,28 @@ SRCS = main.cpp PhoneBook.cpp Contact.cpp
 RM = rm -rf
 
 OBJS = $(SRCS:.cpp=.o)
+RED    := \033[1;31m
+YELLOW := \033[1;33m
+RESET  := \033[0m
+
 
 %.o : %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-	@echo "Compiled $<"
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
+	@echo -e "$(YELLOW)Compiled$(RESET)"
 
 $(NAME) : $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-	@echo "Build complete"
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+	@echo -e "$(RED)Building $(RESET)"
 
 all : $(NAME)
 
 clean :
-	$(RM) $(OBJS)
-	@echo "Object files removed"
+	@$(RM) $(OBJS)
+	@echo "$(RED)Object files cleaned$(RESET)"
 
 fclean : clean
-	$(RM) $(NAME)
-	@echo "Binary removed"
+	@$(RM) $(NAME)
+	@echo "$(RED)Everything removed$(RESET)"
 
 re : fclean all
 

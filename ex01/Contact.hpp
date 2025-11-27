@@ -16,7 +16,7 @@ class Contact
     std::string darkest_Secret;
 
     public:
-    Contact(); // consturctor
+    //Contact(); // consturctor
     void fillContact(); //ask user for input  
     std::string getFirstName();
     std::string getLastName();
@@ -25,7 +25,7 @@ class Contact
     std::string getDarkestSecret();
     
 
-    Contact::Contact();
+    //Contact::Contact();
     
 };
 

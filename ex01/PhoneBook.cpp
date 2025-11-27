@@ -2,7 +2,14 @@
 #include <cstdlib>
 #include <iomanip>
 #include "PhoneBook.hpp"
-
+// constructor
+PhoneBook::PhoneBook() : count(0), oldestIndex(0)
+{
+}
+// destructor
+PhoneBook::~PhoneBook()
+{
+}
 void PhoneBook::AddContact()
 {
     Contact temp;

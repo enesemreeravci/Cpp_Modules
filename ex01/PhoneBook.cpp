@@ -67,8 +67,11 @@ void PhoneBook::Search()
         }
         std::string input;
         std::cout << "Enter index: ";
-        if(!std::getline(std::cin, input));
+        if(!std::getline(std::cin, input))
+        {
+            std::cout << "Input error" << std::endl;
             return; 
+        }
         if(input.empty())
         {
             std::cout << "Invalid" << std::endl;

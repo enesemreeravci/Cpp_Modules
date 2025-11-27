@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string.h>
+#include <cstdlib>
 #include <iomanip>
 #include "PhoneBook.hpp"
 
@@ -51,6 +51,7 @@ void PhoneBook::Search()
     }
     else
     {
+        //setw is a formatting manipulator , it forces the total with to be 10
         std::cout << std::setw(10) << "Index" << "|" <<
         std::setw(10) << "First Name" << "|" << 
         std::setw(10) << "Last Name" << "|" <<
@@ -63,6 +64,30 @@ void PhoneBook::Search()
             FormatField(contactsArray[i].getLastName()) << "|" << std::setw(10) <<
             FormatField(contactsArray[i].getNickName()) << "|" << std::endl;
             i++;
+        }
+        std::string input;
+        std::cout << "Enter index: ";
+        if(!std::getline(std::cin, input));
+            return; 
+        if(input.empty())
+        {
+            std::cout << "Invalid" << std::endl;
+            return;
+        }
+        int index = std::atoi(input.c_str());
+        if(index < 0 || index >= count)
+        {
+            std::cout << "Invalid index" << std::endl;
+            return;
+        }
+        else
+        {
+            Contact &c = contactsArray[index];
+            std::cout << "First Name: " << c.getFirstName() << std::endl;
+            std::cout << "Last Name: " << c.getLastName() << std::endl;
+            std::cout << "Nick Name: " << c.getNickName() << std::endl;
+            std::cout << "Phone Number: " << c.getPhoneNumber() << std::endl;
+            std::cout << "Darkest Secret: " << c.getDarkestSecret() << std::endl;
         }
     }
 }

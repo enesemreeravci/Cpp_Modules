@@ -63,7 +63,6 @@ bool	Account::makeWithdrawal( int withdrawal )
         Account::_displayTimestamp();
         std::cout << " index:" << _accountIndex
               << ";amount:" << _amount
-              << ";withdrawal:" << withdrawal
               << ";withdrawal:refused:"
               << std::endl;
         return false;

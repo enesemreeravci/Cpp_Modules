@@ -1,33 +1,32 @@
-NAMEE = BraiiiiiiinnnzzzZ
+NAME = BraiiiiiiinnnzzzZ
+
 CXX = c++
-CXXFLAGS = -Wall -Werror -Wextra -std-c++98
-RM = rm -rf
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+
+SRCS = main.cpp Zombie.cpp randomChump.cpp newZombie.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 
-# COLORS
-
+# colors
 GREEN = \033[0;32m
-RED   = \033[0;31m
-BLUE  = \033[0;34m
-RESET = \033[0m
 
-SRC = main.cpp newZommbie.cpp RandomChump.cpp Zombie.cpp
-OBJ = $(SRC:.cpp=.o)
+all: $(NAME)
 
-%.o : %.cpp 
-	$(CXX) $(OBJ) -o $(NAME)
-	@echo "$(GREEN) Build complete -> $(NAME)$(RESET)"
+$(NAME): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+	@echo "$(GREEN)Program is ready"
 
-all : $(NAME)
+%.o: %.cpp
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean :
-	$(RM) *.o
-	@echo "$(RED)Object files removed $(RESET)"
+clean:
+	@rm -f $(OBJS)
+	@echo "$(GREEN)Object files removed"
 
-fclean : clean
-	$(RM) $(NAME)
-	@echo "$(RED)Binary removed$(RESET)"
+fclean: clean
+	@rm -f $(NAME)
+	@echo "$(GREEN)Removes everything"
 
-re : fclean all
+re: fclean all
 
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re

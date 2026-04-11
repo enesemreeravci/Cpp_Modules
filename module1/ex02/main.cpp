@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 int main()
 {
@@ -11,7 +12,7 @@ int main()
     // a reference to the string
     std::string &stringREF = str;
     std::cout << "Mem adress of the string variable: " << &str << '\n';
-    std::cout << "Mem address of held by stirngPTR: " <<  &stringPTR << '\n';
+    std::cout << "Mem address of held by stirngPTR: " << stringPTR << '\n';
     std::cout << "Mem address held by stringREF: " << &stringREF << '\n';
 
     std::cout << '\n';

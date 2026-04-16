@@ -33,6 +33,7 @@ void Harl::complain(std::string level)
     }
     switch (level_index) {
         case 0:
+            // Harl::debug() also same
             this->debug();
 			this->info();
 			this->warning();

@@ -6,7 +6,7 @@ bool processFile(const std::string &fileName, const std::string &str1,const std:
 
     if(!infile.is_open())
     {
-        std::cerr << "Error: cannot open the file\n";
+        std::cerr << "Error: cannot open the file" << std::endl;
         return false;
     }
 
@@ -14,7 +14,7 @@ bool processFile(const std::string &fileName, const std::string &str1,const std:
     std::ofstream outfile(outputFile.c_str());
     if(!outfile.is_open())
     {
-        std::cerr << "Error: cannot create the file\n";
+        std::cerr << "Error: cannot create the file" << std::endl;
         return false;
     }
     std::string line;

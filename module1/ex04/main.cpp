@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
     if (argc != 4)
     {
-        std::cerr << "Error: Program usage: <program_name> <filename> <str1> <str2>\n";
+        std::cerr << "Error: Program usage: <program_name> <filename> <str1> <str2>" << std::endl;
         return 1;
     } 
     else

@@ -32,7 +32,17 @@ private:
     bool operator==(const Fixed& other) const;
     bool operator!=(const Fixed& other) const;
     
+    // The 4 arithmetic operators: +, -, *, and /
 
+    Fixed operator+(const Fixed& other) const;
+    Fixed operator-(const Fixed& other) const;
+    Fixed operator*(const Fixed& other) const;
+    Fixed operator/(const Fixed& other) const;
+    
+    Fixed operator++(int); // ++x prefix: increment value first and then use
+    Fixed operator--(int); // --x
+    Fixed& operator++(void); // x++; postfix: use value first then increment
+    Fixed& operator--(void); // x--;
 
 };
 

@@ -78,6 +78,9 @@ int Fixed::toInt(void) const
  bool Fixed::operator>(const Fixed& other) const
  {
     return (numberFixedPoint > other.numberFixedPoint);
+    // explicitly comparing 
+    // return this->numberFixedPoint > other.numberFixedPoint;
+    // using setter : return this->getRawBits() > other.getRawBits();
  }
 
  bool Fixed::operator<(const Fixed& other) const
@@ -103,8 +106,61 @@ int Fixed::toInt(void) const
  bool Fixed::operator!=(const Fixed& other) const
  {
     return (numberFixedPoint != other.numberFixedPoint);
+    // this->numberFixedPoint != other.numberFixedPoint;
  }
 
  // The 4 arithmetic operators: +, -, *, and /
 
- 
+ Fixed Fixed::operator+(const Fixed& other) const
+ {
+    Fixed res;
+    res = this->numberFixedPoint + other.numberFixedPoint;
+    return res; 
+}
+
+Fixed Fixed::operator-(const Fixed& other) const
+{
+    Fixed res;
+    res = this->numberFixedPoint - other.numberFixedPoint;
+    return res;
+}
+
+Fixed Fixed::operator*(const Fixed& other) const
+{
+    Fixed res;
+    res = this->numberFixedPoint * other.numberFixedPoint;
+    return res;
+}
+
+Fixed Fixed::operator/(const Fixed& other) const
+{
+    Fixed res;
+    res = this->numberFixedPoint / other.numberFixedPoint;
+    return res;
+}
+
+Fixed Fixed::operator++(int) // postfix -> returns old value by copy
+{
+    Fixed temp(*this);      // save old value
+    ++numberFixedPoint;     // increment current object
+    return temp;            // return old value
+}
+
+Fixed Fixed::operator--(int) // postfix -> returns old value by copy
+{
+    Fixed temp(*this);      // save old value
+    --numberFixedPoint;     // decrement current object
+    return temp;            // return old value
+}
+
+Fixed& Fixed::operator++() // prefix -> efficient, returns updated object
+{
+    ++numberFixedPoint;
+    return *this;
+}
+
+Fixed& Fixed::operator--() // prefix -> efficient, returns updated object
+{
+    --numberFixedPoint;
+    return *this;
+}

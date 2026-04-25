@@ -164,3 +164,35 @@ Fixed& Fixed::operator--() // prefix -> efficient, returns updated object
     --numberFixedPoint;
     return *this;
 }
+
+Fixed& Fixed::findMin(Fixed& a, Fixed& b)
+{
+    if(a < b)
+        return a;
+    else 
+        return b;
+}
+
+Fixed& Fixed::findMax(Fixed& a, Fixed& b)
+{
+    if(a > b)
+        return a;
+    else
+        return b;
+}
+
+const Fixed& findMin(const Fixed& a, const Fixed& b)
+{
+    if(a < b)
+        return a;
+    else 
+        return b;
+}
+
+const Fixed& findMax(const Fixed& a, const Fixed& b)
+{
+    if(a > b)
+        return a;
+    else
+        return b;
+}

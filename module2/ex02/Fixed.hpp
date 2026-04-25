@@ -44,6 +44,14 @@ private:
     Fixed& operator++(void); // x++; postfix: use value first then increment
     Fixed& operator--(void); // x--;
 
+
+    // The 4 public overloaded member functions
+
+    static Fixed& findMin(Fixed& a, Fixed& b);
+    static Fixed& findMax(Fixed& a, Fixed& b);
+    static const Fixed& findMin(const Fixed& a, const Fixed& b);
+    static const Fixed& findMax(const Fixed& a, const Fixed& b);
+
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed_num);

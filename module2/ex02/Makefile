@@ -13,7 +13,8 @@ $(NAME): $(OBJS)
 clean: 
 	@rm -rf $(OBJS)
 
-fclean: clean
+fclean: clean 
+	@rm -f $(NAME)
 
 re: fclean $(NAME)
 

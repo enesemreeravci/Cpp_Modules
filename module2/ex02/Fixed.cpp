@@ -114,28 +114,28 @@ int Fixed::toInt(void) const
  Fixed Fixed::operator+(const Fixed& other) const
  {
     Fixed res;
-    res = this->numberFixedPoint + other.numberFixedPoint;
+    res = this->toFloat() + other.toFloat();
     return res; 
 }
 
 Fixed Fixed::operator-(const Fixed& other) const
 {
     Fixed res;
-    res = this->numberFixedPoint - other.numberFixedPoint;
+    res = this->toFloat() - other.toFloat();
     return res;
 }
 
 Fixed Fixed::operator*(const Fixed& other) const
 {
     Fixed res;
-    res = this->numberFixedPoint * other.numberFixedPoint;
+    res = this->toFloat() * other.toFloat();
     return res;
 }
 
 Fixed Fixed::operator/(const Fixed& other) const
 {
     Fixed res;
-    res = this->numberFixedPoint / other.numberFixedPoint;
+    res = this->toFloat() / other.toFloat();
     return res;
 }
 
@@ -165,7 +165,7 @@ Fixed& Fixed::operator--() // prefix -> efficient, returns updated object
     return *this;
 }
 
-Fixed& Fixed::findMin(Fixed& a, Fixed& b)
+Fixed& Fixed::min(Fixed& a, Fixed& b)
 {
     if(a < b)
         return a;
@@ -173,7 +173,7 @@ Fixed& Fixed::findMin(Fixed& a, Fixed& b)
         return b;
 }
 
-Fixed& Fixed::findMax(Fixed& a, Fixed& b)
+Fixed& Fixed::max(Fixed& a, Fixed& b)
 {
     if(a > b)
         return a;
@@ -181,7 +181,7 @@ Fixed& Fixed::findMax(Fixed& a, Fixed& b)
         return b;
 }
 
-const Fixed& findMin(const Fixed& a, const Fixed& b)
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
 {
     if(a < b)
         return a;
@@ -189,7 +189,7 @@ const Fixed& findMin(const Fixed& a, const Fixed& b)
         return b;
 }
 
-const Fixed& findMax(const Fixed& a, const Fixed& b)
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
 {
     if(a > b)
         return a;

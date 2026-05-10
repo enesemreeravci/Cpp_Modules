@@ -23,8 +23,6 @@ class ClapTrap
 
         std::string getName();
         unsigned int getDamage();
-        unsigned int getHitPoints(); 
-        unsigned int getEnergyPoints();
 };
 
 #endif

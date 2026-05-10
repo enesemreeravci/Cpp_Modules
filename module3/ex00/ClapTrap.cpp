@@ -41,35 +41,53 @@ ClapTrap::~ClapTrap()
 
 void ClapTrap::attack(const std::string& target)
 {
-    if(hitPoints > 0 && energyPoints > 0)
-        std::cout << getName() << " attacks to " << target << " causing " << getDamage() << " points of damage." << std::endl;
+    if (hitPoints <= 0)
+    {
+        std::cout << name << " cannot attack due to @hitPoints." << std::endl;
+    }
+    else if(energyPoints <= 0)
+    {
+        std::cout << name << " cannot attack due to @energyPoints." << std::endl;
+    }
     else
-        std::cout << name << " cannot attack due to @hitPoints or @energyPoints" << std::endl;
-
+    {
+        std::cout << name << " attacks to " << target << " causing " << attackDamage << " points of damage." << std::endl;
+        energyPoints = energyPoints - 1;
+    }
 }
-void takeDamage(unsigned int amount)
+void ClapTrap::takeDamage(unsigned int amount)
 {
-    hitPoints -= amount;
-    if(hitPoints < 0)
+    if (hitPoints == 0)
+    {
+        std::cout << name << " is already dead." << std::endl;
+    }
+
+    else if (amount >= hitPoints)
+    {
         hitPoints = 0;
-    std::cout << name << " takes " << amount << " points of damage!" << " Hitpoints left: " << hitPoints << std::endl;  
+        std::cout << name << " attacked and died." << std::endl;
+    }
+    else 
+    {
+        hitPoints = hitPoints - amount;
+        std::cout << name << " was attacked. Hit points left : " << hitPoints << std::endl;
+    }
+}
+void ClapTrap::beRepaired(unsigned int amount)
+{
+    if(hitPoints == 0)
+    {
+        std::cout << name << " is already dead. Cannot be repaired." << std::endl;
+    }
+    else if (energyPoints <= 0)
+    {
+        std::cout << name << " no energyPoints. Cannot be repaired." << std::endl;
+    }
+    else 
+    {
+        hitPoints += amount;
+        energyPoints -= 1;
+        std::cout << name << " was repaired. Hit points: " << hitPoints << std::endl; 
+    }
 }
 
-std::string ClapTrap::getName()
-{
-    return name;
-}
-
-unsigned int ClapTrap::getDamage()
-{
-    return attackDamage;
-}
-
-unsigned int ClapTrap::getHitPoints()
-{
-    return hitPoints;
-}
-unsigned int ClapTrap::getEnergyPoints()
-{
-    return energyPoints;
-}

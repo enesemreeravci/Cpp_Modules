@@ -5,6 +5,8 @@
 
 class ScavTrap : public ClapTrap
 {
+    private:
+        bool isGuardGate;
 
     public:
         ScavTrap();

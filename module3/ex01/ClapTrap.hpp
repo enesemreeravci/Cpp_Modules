@@ -6,7 +6,7 @@
 
 class ClapTrap
 {
-    private:
+    protected: // allows us to accesible for derived class
         std::string name;
         unsigned int hitPoints;
         unsigned int energyPoints;

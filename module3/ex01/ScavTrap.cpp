@@ -10,7 +10,7 @@ ScavTrap::ScavTrap(): ClapTrap()
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-    std::cout << "[ScavTrap] " << name << "consctructor called" << std::endl;
+    std::cout << "[ScavTrap] " << name << " consctructor called" << std::endl;
     this->hitPoints = 100;
     this->energyPoints = 100;
     this->attackDamage = 20;
@@ -33,21 +33,21 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other)
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "Deconstructor called" << std::endl;
+    std::cout << "[ScavTrap] " << name << " destructor called" << std::endl;
 }
 void ScavTrap::attack(const std::string& target)
 {
     if (hitPoints <= 0)
     {
-        std::cout << "[ScapTrap] " << name << " cannot attack due to @hitPoints." << std::endl;
+        std::cout << "[ScavTrap] " << name << " cannot attack due to @hitPoints." << std::endl;
     }
     else if(energyPoints <= 0)
     {
-        std::cout << "[ScapTrap] " << name << " cannot attack due to @energyPoints." << std::endl;
+        std::cout << "[ScavTrap] " << name << " cannot attack due to @energyPoints." << std::endl;
     }
     else
     {
-        std::cout << "[ScapTrap] " << name << " attacks " << target << " causing " << attackDamage << " points of damage!" << std::endl;
+        std::cout << "[ScavTrap] " << name << " attacks " << target << " causing " << attackDamage << " points of damage!" << std::endl;
         energyPoints = energyPoints - 1;
     }
 }

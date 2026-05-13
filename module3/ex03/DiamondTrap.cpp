@@ -28,7 +28,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other):
     std::cout << "[DiamondTrap] copy constructor called" << std::endl;
 }
 
-DiamondTrap& DiamondTrap::operator=(const FragTrap& other)
+DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
 {
     
     if(this != &other)

@@ -2,19 +2,19 @@
 
 ClapTrap::ClapTrap() : name("default"), hitPoints(10), energyPoints(10), attackDamage(0)
 {
-    std::cout << "Default constructor called." << std::endl;
+    std::cout << "[ClapTrap] " << "Default constructor called." << std::endl;
 }
-ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10), energyPoints(10), attackDamage(10)
+ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10), energyPoints(10), attackDamage(0)
 {   
-    std::cout << "Name constructor called for " << name << std::endl;
+    std::cout << "[ClapTrap] " << "Name constructor called for " << name << std::endl;
 }
 ClapTrap::ClapTrap(const ClapTrap& other) : name(other.name), hitPoints(other.hitPoints), energyPoints(other.energyPoints), attackDamage(other.attackDamage)
 {
-    std::cout << "Copy constructor called." << std::endl;
+    std::cout << "[ClapTrap] " << "Copy constructor called." << std::endl;
 }
 ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
+    std::cout << "[ClapTrap] " << "Copy assignment operator called" << std::endl;
 
     //self-assignment protection
     if(this != &other)
@@ -36,11 +36,11 @@ void ClapTrap::attack(const std::string& target)
 {
     if (hitPoints <= 0)
     {
-        std::cout << "[ClapTrap] " << name << " cannot attack due to @hitPoints." << std::endl;
+        std::cout << "[ClapTrap] " << name << " cannot attack beacause it has no hit points." << std::endl;
     }
     else if(energyPoints <= 0)
     {
-        std::cout << "[ClapTrap] " << name << " cannot attack due to @energyPoints." << std::endl;
+        std::cout << "[ClapTrap] " << name << " cannot attack because it has no energy points." << std::endl;
     }
     else
     {
@@ -63,7 +63,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     else 
     {
         hitPoints = hitPoints - amount;
-        std::cout << "[ClapTrap] "<< name << " was attacked. Hit points left : " << hitPoints << std::endl;
+        std::cout << "[ClapTrap] "<< name << " was attacked and took " << amount << " points of damage." << " Hit points left : " << hitPoints << std::endl;
     }
 }
 void ClapTrap::beRepaired(unsigned int amount)

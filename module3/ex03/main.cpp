@@ -1,80 +1,64 @@
+#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include "DiamondTrap.hpp"
 
 int main()
 {
-    std::cout << "\n========== CLAPTRAP TEST ==========\n" << std::endl;
+    std::cout << "\n========== DIAMONDTRAP BASIC TEST ==========\n" << std::endl;
 
-    ClapTrap clap("Clappy");
+    DiamondTrap diamond("Diamondy");
 
-    clap.attack("Bandit");
-    clap.takeDamage(5);
-    clap.beRepaired(3);
+    diamond.attack("Enemy");
+    diamond.takeDamage(40);
+    diamond.beRepaired(20);
+    diamond.whoAmI();
 
+    std::cout << "\n========== INHERITED SPECIAL FUNCTIONS TEST ==========\n" << std::endl;
 
-
-    std::cout << "\n========== SCAVTRAP TEST ==========\n" << std::endl;
-
-    ScavTrap scav("Guardian");
-
-    scav.attack("Enemy");
-    scav.takeDamage(20);
-    scav.beRepaired(10);
-    scav.guardGate();
-
-
-
-    std::cout << "\n========== FRAGTRAP TEST ==========\n" << std::endl;
-
-    FragTrap frag("Destroyer");
-
-    frag.attack("Target");
-    frag.takeDamage(40);
-    frag.beRepaired(25);
-    frag.highFivesGuys();
-
-
-
-    std::cout << "\n========== DIAMONDTRAP TEST ==========\n" << std::endl;
-
-    DiamondTrap diamond("Diamond");
-
-    diamond.attack("Ultimate Boss");
-    diamond.takeDamage(30);
-    diamond.beRepaired(15);
-
-    // inherited abilities
     diamond.guardGate();
     diamond.highFivesGuys();
 
-    // DiamondTrap special function
-    diamond.whoAmI();
+    std::cout << "\n========== DIAMONDTRAP ENERGY TEST ==========\n" << std::endl;
 
+    DiamondTrap battery("DiamondBattery");
 
+    for (int i = 0; i < 51; i++)
+        battery.attack("Target");
 
-    std::cout << "\n========== ENERGY TEST ==========\n" << std::endl;
+    std::cout << "\n========== DIAMONDTRAP DEAD TEST ==========\n" << std::endl;
 
-    ClapTrap energy("LowBattery");
+    DiamondTrap dead("DeadDiamond");
 
-    for (int i = 0; i < 11; i++)
-        energy.attack("Training Dummy");
+    dead.takeDamage(150);
+    dead.attack("Enemy");
+    dead.beRepaired(10);
+    dead.whoAmI();
 
+    std::cout << "\n========== COPY CONSTRUCTOR TEST ==========\n" << std::endl;
 
+    DiamondTrap copyDiamond(diamond);
 
-    std::cout << "\n========== COPY TEST ==========\n" << std::endl;
+    copyDiamond.attack("Copied Enemy");
+    copyDiamond.whoAmI();
 
-    DiamondTrap original("Original");
-
-    DiamondTrap copy(original);
+    std::cout << "\n========== ASSIGNMENT OPERATOR TEST ==========\n" << std::endl;
 
     DiamondTrap assigned;
-    assigned = original;
 
-    copy.whoAmI();
+    assigned = diamond;
+    assigned.attack("Assigned Enemy");
     assigned.whoAmI();
 
+    std::cout << "\n========== CONSTRUCTION / DESTRUCTION CHAIN TEST ==========\n" << std::endl;
 
+    {
+        DiamondTrap temp("TemporaryDiamond");
+        temp.attack("Short-lived enemy");
+        temp.whoAmI();
+    }
 
-    std::cout << "\n========== DESTRUCTOR TEST ==========\n" << std::endl;
+    std::cout << "\n========== END OF MAIN ==========\n" << std::endl;
 
-    return 0;
+    return (0);
 }

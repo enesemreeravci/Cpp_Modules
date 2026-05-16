@@ -1,8 +1,15 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap()
+DiamondTrap::DiamondTrap(): 
+    ClapTrap("default_clap_name"), 
+    FragTrap("default"), 
+    ScavTrap("default"),
+    name("default")
 {
-    std::cout << "[DiamondTrap] " << "default constructor called" << std::endl;
+    this->hitPoints = 100;
+    this->energyPoints = 50;
+    this->attackDamage = 30;
+    std::cout << "[DiamondTrap]" << " default constructor called" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const std::string& name): 
@@ -24,7 +31,6 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other):
     ScavTrap(other),
     name(other.name)
 {
-    *this = other;
     std::cout << "[DiamondTrap] copy constructor called" << std::endl;
 }
 
@@ -38,14 +44,14 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
         this->name = other.name;
     }
     
-    std::cout << "[DiamondTrap] copy assignment operator called" << std::endl;
+    std::cout << "[DiamondTrap] " << this->name << " copy assignment operator called" << std::endl;
     return *this;
 
 }
 
 DiamondTrap::~DiamondTrap()
 {
-    std::cout << "[DiamondTrap] descturctor called" << std::endl;
+    std::cout << "[DiamondTrap] " << this->name << " destructor called" << std::endl;
 }
 
 void DiamondTrap::attack(const std::string& target)

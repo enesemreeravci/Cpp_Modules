@@ -1,6 +1,5 @@
 #include "FragTrap.hpp"
 
-
 FragTrap::FragTrap()
 {
     std::cout << "[FragTrap] " << "default constructor called" << std::endl;
@@ -10,7 +9,7 @@ FragTrap::FragTrap()
 }
 FragTrap::FragTrap(const std::string name) : ClapTrap(name)
 {
-    std::cout << "[FragTrap] " << name << "constructor called" << std::endl;
+    std::cout << "[FragTrap] " << name << " constructor called" << std::endl;
     this->hitPoints = 100;
     this->energyPoints = 100;
     this->attackDamage = 30;
@@ -23,24 +22,29 @@ FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other)
 
 FragTrap& FragTrap::operator=(const FragTrap& other)
 {
-    std::cout << "[FragTrap] " << "copy assignment operator called" << std::endl;
     
     if(this != &other)
     {
-        FragTrap::operator=(other);
+        ClapTrap::operator=(other);
     }
+    std::cout << "[FragTrap] " << "Copy assignment operator called" << std::endl;
     return *this;
+}
+
+FragTrap::~FragTrap()
+{
+    std::cout << "[FragTrap] " << name << " Destructor called" << std::endl;
 }
 
 void FragTrap::attack(const std::string& target)
 {
     if (hitPoints <= 0)
     {
-        std::cout << "[FragTrap] " << name << " cannot attack due to @hitPoints." << std::endl;
+        std::cout << "[FragTrap] " << name << " cannot attack because it has no hit points." << std::endl;
     }
     else if(energyPoints <= 0)
     {
-        std::cout << "[FragTrap] " << name << " cannot attack due to @energyPoints." << std::endl;
+        std::cout << "[FragTrap] " << name << " cannot attack because it has no energy points." << std::endl;
     }
     else
     {
@@ -51,5 +55,5 @@ void FragTrap::attack(const std::string& target)
 
 void FragTrap::highFivesGuys(void)
 {
-    std::cout << "[FragTrap] " << name << "give me a high five!" << std::endl; 
+    std::cout << "[FragTrap] " << name << " give me a high five!" << std::endl; 
 }

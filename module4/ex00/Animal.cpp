@@ -5,7 +5,7 @@ Animal::Animal() : type("Default")
     std::cout << "[Animal] default constructor called" << std::endl;
 }
 
-Animal::Animal(const std::string type) : type(type)
+Animal::Animal(const std::string& type) : type(type)
 {
     std::cout << "[Animal] " << type << " type constructor called" << std::endl;  
 }
@@ -27,4 +27,13 @@ Animal& Animal::operator=(const Animal& rhs)
 Animal::~Animal()
 {
     std::cout << "[Animal] " << type <<  " destructor called" << std::endl;
+}
+void Animal::makeSound() const
+{
+    std::cout << "[Animal] makeSound() function called" << std::endl;
+}
+
+std::string Animal::getType() const
+{
+    return type;
 }

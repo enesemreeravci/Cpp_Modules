@@ -1,6 +1,6 @@
 #include "Dog.hpp"
 
-Dog::Dog() : Animal()
+Dog::Dog() : Animal("Dog")
 {
     std::cout << "[Dog] default consturctor called" << std::endl;
 }
@@ -32,6 +32,6 @@ Dog::~Dog()
 
 void Dog::makeSound() const
 {
-    std::cout << "[Dog]: WOOF WOOF";
+    std::cout << "[Dog]: makeSound() called and sound : WOOF WOOF" <<  std::endl;
 }
 

@@ -11,7 +11,6 @@ class Cat : public Animal
 
     public:
         Cat();
-        Cat(const std::string& type);
         Cat(const Cat& rhs);
         Cat& operator=(const Cat& rhs);
         virtual ~Cat();

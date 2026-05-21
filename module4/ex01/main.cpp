@@ -3,38 +3,48 @@
 #include "Dog.hpp"
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
-
+#include "Brain.hpp"
 
 int main()
 {
+
+    std::cout << "\n====== CREATING AND FILLING ANIMAL ARRAY ======\n";
+
+    const int size = 4;
+    Animal* animal[size];
+
+    for(int i = 0; i < size; i++)
+    {
+        if(i < size / 2)
+        {
+            animal[i] = new Dog();
+        }
+        else
+        {
+            animal[i] = new Cat();
+        }
+    }
+    std::cout << std::endl;
+    for (int i =0; i< size; i++)
+    {
+        animal[i]->makeSound();
+    }
+    std::cout << std::endl;
+    for (int i =0; i <size; i++)
+    {
+        std::cout << animal[i]->getType() << std::endl;
+    }
+    std::cout << std::endl;
+    for(int i =0; i < size; i++)
+    {
+        delete animal[i];
+    }
+
+
+
     
-    const WrongAnimal* kobi = new WrongCat();
-    const WrongAnimal* pamuk = new WrongCat("pamuk");
-
-    std::cout << kobi->getType() << " " << std::endl;
-    std::cout << pamuk->getType() << " " << std::endl;
-
-    kobi->makeSound();
-    pamuk->makeSound();
-
-    delete kobi;
-    delete pamuk;
-    // const Animal* meta = new Animal();
-    // const Animal* j = new Dog();
     
-    // const Animal* i = new Cat();
 
-    // std::cout << j->getType() << " " << std::endl;
-    // std::cout << i->getType() << " " << std::endl;
-
-    // i->makeSound(); //will output the cat sound!
-    // j->makeSound();
-    // meta->makeSound();
-        
-
-    // delete meta;
-    // delete i;
-    // delete j;
 
     
     return 0;

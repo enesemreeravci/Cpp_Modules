@@ -15,7 +15,7 @@ class Brain
         Brain& operator=(const Brain& rhs);
         ~Brain();
 
-        void setIdaes(int index, const std::string& idea);
+        void setIdeas(int index, const std::string& idea);
         std::string getIdeas(int index) const;
 };
 

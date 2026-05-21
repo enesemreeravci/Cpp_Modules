@@ -32,7 +32,7 @@ Brain::~Brain()
    std::cout << "[Brain] copy constructor called" << std::endl;
 }
 
-void Brain::setIdaes(int index, const std::string& idea)
+void Brain::setIdeas(int index, const std::string& idea)
 {
     if(index < 0 && index > 100)
     {

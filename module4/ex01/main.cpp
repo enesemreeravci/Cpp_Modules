@@ -40,8 +40,19 @@ int main()
         delete animal[i];
     }
 
+    std::cout << "\n=== TESTING DEEP COPY ===\n";
+    
+    Dog originalDog;
+    originalDog.getBrain()->setIdeas(0, "I love bones");
 
+    std::cout << "Copying originalDog into cloneDog" << std::endl;
 
+    Dog clonedDog = originalDog;
+
+    std::cout << "Changing cloneDog's idea ===\n";
+    clonedDog.getBrain()->setIdeas(0, "I want to chase cats");
+    std::cout << "Original Dog Idea 0: " << originalDog.getBrain()->getIdeas(0) << std::endl;
+    std::cout << "Cloned Dog Idea 0:   " << clonedDog.getBrain()->getIdeas(0) << std::endl;
     
     
 

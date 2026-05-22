@@ -34,19 +34,16 @@ Brain::~Brain()
 
 void Brain::setIdeas(int index, const std::string& idea)
 {
-    if(index < 0 && index > 100)
+    if(index >= 0 && index < 100)
     {
-        for (int i = 0; i < 100; i++)
-            ideas[index] = idea[index];
+        ideas[index] = idea;
     }
 
 }
 
 std::string Brain::getIdeas(int index) const
 {
-    if (index < 0 && index > 100)
-    {
-        std::cerr << "Error! Index must be between 0-100";
-    }
-    return ideas[index];
+    static const std::string empty = "";
+
+    return (index >= 0 && index < 100) ? ideas[index] : empty;
 }

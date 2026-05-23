@@ -29,7 +29,7 @@ Brain& Brain::operator=(const Brain& rhs)
 
 Brain::~Brain()
 {
-   std::cout << "[Brain] copy constructor called" << std::endl;
+   std::cout << "[Brain] destructor called" << std::endl;
 }
 
 void Brain::setIdeas(int index, const std::string& idea)

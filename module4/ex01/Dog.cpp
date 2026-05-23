@@ -4,7 +4,6 @@ Dog::Dog() : Animal("Dog")
 {
     std::cout << "[Dog] default consturctor called" << std::endl;
     brain = new Brain();
-
 }
 
 Dog::Dog(const Dog& rhs) : Animal(rhs)

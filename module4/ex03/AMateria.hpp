@@ -5,6 +5,7 @@
 #include <string>
 #include "ICharacter.hpp"
 
+// base abstract class
 class AMateria
 {
     protected:

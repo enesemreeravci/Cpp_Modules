@@ -1,4 +1,5 @@
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 AMateria::AMateria(void)
 {
@@ -29,3 +30,14 @@ AMateria::~AMateria()
 {
     std::cout << "[AMateria] virtual destructor called" << std::endl;
 }
+
+const std::string& AMateria::getType() const
+{
+    return type;
+}
+
+void AMateria::use(ICharacter& target)
+{
+    std::cout << "[AMateria] using a Materia on a " << target.getName() << " !" << std::endl;
+}
+

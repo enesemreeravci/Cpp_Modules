@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include <string>
-#include "ICharacter.hpp"
+
+class ICharacter;
 
 // base abstract class
 class AMateria

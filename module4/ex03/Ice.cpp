@@ -1,7 +1,7 @@
 #include "Ice.hpp"
 #include "ICharacter.hpp"
 
-Ice::Ice(void) : AMateria("Ice")
+Ice::Ice(void) : AMateria("ice")
 {
     std::cout << "[Ice] default constructor called" << std::endl;
 }
@@ -21,9 +21,16 @@ Ice& Ice::operator=(const Ice& rhs)
     return *this;
 }
 
-void Ice::use(ICharacter& target) 
+Ice::~Ice()
 {
-    std::cout << "* shoots an ice bolt at " << target.getName() << std::endl; 
+    std::cout << "[Ice] destructor called" << std::endl;
+}
+
+void Ice::use(ICharacter& target)
+{
+    std::cout << "* shoots an ice bolt at "
+              << target.getName()
+              << " *" << std::endl;
 }
 
 Ice* Ice::clone(void) const

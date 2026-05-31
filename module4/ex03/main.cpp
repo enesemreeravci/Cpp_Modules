@@ -52,7 +52,9 @@ int main()
     hero.use(0, target);
 
     std::cout << "\nUnequipping slot 0..." << std::endl;
+    AMateria* droppedHero = hero.getMateria(0);
     hero.unequip(0);
+    delete droppedHero;
 
     std::cout << "\nTrying to use slot 0 after unequip..." << std::endl;
     hero.use(0, target);
@@ -101,7 +103,9 @@ int main()
     Character second(first);
 
     std::cout << "\nRemoving first inventory slot..." << std::endl;
+    AMateria* droppedFirst = first.getMateria(0);
     first.unequip(0);
+    delete droppedFirst;
 
     std::cout << "\nFirst uses slot 0:" << std::endl;
     first.use(0, target);

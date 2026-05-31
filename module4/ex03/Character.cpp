@@ -56,6 +56,9 @@ Character::~Character()
 }
 void Character::equip(AMateria* m)
 {
+    if (!m)
+        return;
+
     for (int i = 0; i < 4; i++)
     {
         if (!inventory[i])
@@ -64,6 +67,7 @@ void Character::equip(AMateria* m)
             return;
         }
     }
+    delete m;
 }
 const std::string& Character::getName() const
 {
@@ -82,4 +86,11 @@ void Character::use(int idx, ICharacter& target)
 {
  if (idx >= 0 && idx < 4 && inventory[idx])
         inventory[idx]->use(target);
+}
+
+AMateria* Character::getMateria(int idx) const
+{
+    if (idx < 0 || idx >= 4)
+        return NULL;
+    return inventory[idx];
 }

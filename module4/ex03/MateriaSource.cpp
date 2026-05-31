@@ -51,17 +51,20 @@ MateriaSource::~MateriaSource()
 
 void MateriaSource::learnMateria(AMateria* m)
 {
-    if(!m)
+    if (!m)
         return;
 
-    for (int i =0; i< 4; i++)
+    for (int i = 0; i < 4; i++)
     {
-        if(!materia[i])
+        if (!materia[i])
         {
             materia[i] = m->clone();
+            delete m;
             return;
         }
     }
+
+    delete m;
 }
 
 AMateria* MateriaSource::createMateria(const std::string& type)

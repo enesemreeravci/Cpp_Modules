@@ -9,7 +9,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-	echo "COMPILED $(NAME) successfully"
+	@echo "Compiled $(NAME) successfully"
 
 clean:
 	rm -f $(OBJS)

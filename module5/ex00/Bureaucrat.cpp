@@ -12,7 +12,7 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name), grade(g
         throw GradeTooHighException();
     else if (grade < 1) 
         throw GradeTooLowException();
-    std::cout << "Paramatrized constructor called" << std::endl;
+    std::cout << "Parametrized constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& copy)
@@ -57,12 +57,17 @@ void Bureaucrat::dec()
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
-    return ("Exception: The highest possible grade is 1");
+    return ("Exception: Grade is too high");
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
-    return ("Exception: The lowrst possible grade is 150");
+    return ("Exception: Grade is too low");
+}
+void Bureaucrat::printBureaucrat() const
+{
+    std::cout << "Bureaucrat's name: " << getName() << std::endl;
+    std::cout << "Bureaucrat's grade: " << getGrade() << std::endl;
 }
 
 Bureaucrat::~Bureaucrat()

@@ -33,8 +33,7 @@ class Bureaucrat
             public:
                 const char *what() const throw();
         };
-    
-        
+        void printBureaucrat() const;
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj);

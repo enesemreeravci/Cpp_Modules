@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-
+#include "Form.hpp"
 Bureaucrat::Bureaucrat() : name("default")
 {
     this->grade = 150;
@@ -68,6 +68,24 @@ void Bureaucrat::printBureaucrat() const
 {
     std::cout << "Bureaucrat's name: " << getName() << std::endl;
     std::cout << "Bureaucrat's grade: " << getGrade() << std::endl;
+}
+
+// for ex01
+void Bureaucrat::signForm(Form& f)
+{
+    try
+    {
+        f.beSigned(*this);
+        std::cout << getName() << " signed " << f.getName() << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << getName() << " couldn't sign "
+                  << f.getName()
+                  << " because "
+                  << e.what()
+                  << std::endl;
+    }
 }
 
 Bureaucrat::~Bureaucrat()

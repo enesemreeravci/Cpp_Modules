@@ -3,13 +3,17 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <exception>
+#include <stdexcept>
+
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
 class AForm
 {
-    private:    
+    protected:    
         const std::string name_f;
         bool isSigned;
         const int grade_s;
@@ -23,7 +27,7 @@ class AForm
         ~AForm();
 
         void beSigned(const Bureaucrat& b);
-        virtual void execute(const Bureaucrat& executer) = 0;
+        virtual void execute(const Bureaucrat& executor) = 0;
 
         const std::string getName() const;
         int getSignGrade() const;
@@ -37,6 +41,12 @@ class AForm
         };
 
         class GradeTooLowException : public std::exception
+        {
+            public:
+                const char *what() const throw();
+        };
+        
+        class NotSignedException : public std::exception
         {
             public:
                 const char *what() const throw();

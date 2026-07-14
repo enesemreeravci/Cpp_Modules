@@ -1,73 +1,48 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
+
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 
 int main()
 {
-    std::cout << "===== Bureaucrats =====\n";
-    Bureaucrat alice("Alice", 1);
-    Bureaucrat bob("Bob", 75);
-    Bureaucrat charlie("Charlie", 150);
+    std::srand(std::time(NULL));
 
-    std::cout << alice << std::endl;
-    std::cout << bob << std::endl;
-    std::cout << charlie << std::endl;
+    Bureaucrat boss("Boss", 1);
+    Bureaucrat worker("Worker", 50);
+    Bureaucrat low("Low", 140);
 
-    std::cout << "\n===== Valid Forms =====\n";
-    Form topSecret("TopSecret", 10, 5);
-    Form contract("Contract", 100, 50);
+    ShrubberyCreationForm shrub("garden");
+    RobotomyRequestForm robot("Bender");
+    PresidentialPardonForm pardon("Arthur Dent");
 
-    std::cout << topSecret << std::endl;
-    std::cout << contract << std::endl;
+    std::cout << "\n===== SIGNING =====" << std::endl;
+    boss.signForm(shrub);
+    boss.signForm(robot);
+    boss.signForm(pardon);
 
-    std::cout << "\n===== Signing Tests =====\n";
+    std::cout << "\n===== SHRUBBERY =====" << std::endl;
+    boss.executeForm(shrub);
 
-    alice.signForm(topSecret);      // Should succeed
-    bob.signForm(topSecret);        // Should fail
+    std::cout << "\n===== ROBOTOMY =====" << std::endl;
+    for (int i = 0; i < 5; i++)
+        boss.executeForm(robot);
 
-    std::cout << topSecret << std::endl;
+    std::cout << "\n===== PRESIDENTIAL =====" << std::endl;
+    boss.executeForm(pardon);
 
-    bob.signForm(contract);         // Should succeed
-    charlie.signForm(contract);     // Should fail (or already signed)
+    std::cout << "\n===== EXECUTE UNSIGNED FORM =====" << std::endl;
+    RobotomyRequestForm robot2("Marvin");
+    boss.executeForm(robot2);
 
-    std::cout << contract << std::endl;
+    std::cout << "\n===== GRADE TOO LOW =====" << std::endl;
+    worker.executeForm(robot);     // exec grade is 45
 
-    std::cout << "\n===== Invalid Forms =====\n";
-
-    try
-    {
-        Form bad1("Bad1", 0, 10);
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << "Failed to create Bad1: " << e.what() << std::endl;
-    }
-
-    try
-    {
-        Form bad2("Bad2", 151, 10);
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << "Failed to create Bad2: " << e.what() << std::endl;
-    }
-
-    try
-    {
-        Form bad3("Bad3", 10, 0);
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << "Failed to create Bad3: " << e.what() << std::endl;
-    }
-
-    try
-    {
-        Form bad4("Bad4", 10, 151);
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << "Failed to create Bad4: " << e.what() << std::endl;
-    }
+    std::cout << "\n===== SHRUBBERY LOW GRADE =====" << std::endl;
+    low.executeForm(shrub);        // exec grade is 137
 
     return 0;
 }

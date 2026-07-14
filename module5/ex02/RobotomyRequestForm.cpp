@@ -1,6 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(std::string& newTarget) : AForm("RobotomyRequestForm", 72, 45), target(newTarget)
+RobotomyRequestForm::RobotomyRequestForm(const std::string& newTarget) : AForm("RobotomyRequestForm", 72, 45), target(newTarget)
 {
     std::cout << "RobotomyRequestForm constructor is called" << std::endl;
 } 
@@ -31,7 +31,6 @@ void RobotomyRequestForm::execute(const Bureaucrat& executor) const
 {
     if (!getIsSigned())
         throw NotSignedException();
-
     if (executor.getGrade() > grade_e)
         throw GradeTooLowException();
 

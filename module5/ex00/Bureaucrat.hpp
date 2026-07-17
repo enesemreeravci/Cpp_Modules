@@ -22,10 +22,10 @@ class Bureaucrat
 
         void inc(); // increase grade
         void dec(); // decrease grade
-        class GradeTooHighException : public std::exception
+        class GradeTooHighException : public std::exception // intherit from std::exception for hiearchy
         {
             public:
-                const char *what() const throw();
+                const char *what() const throw(); // override the virtual what() method, runtime polymorphism
         };
     
         class GradeTooLowException : public std::exception

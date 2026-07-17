@@ -66,7 +66,7 @@ const char *Form::GradeTooLowException::what() const throw()
 {
     return ("Exception: Grade is too low");
 }
-
+// bureaucrat wants to sign a form
 void Form::beSigned(const Bureaucrat& b)
 {
     if(b.getGrade() <= grade_s)

@@ -13,7 +13,7 @@ class PresidentialPardonForm : public AForm
         PresidentialPardonForm& operator=(const PresidentialPardonForm& rhs);
         ~PresidentialPardonForm();
 
-        void execute(const Bureaucrat& executor) const;
+        void execute(const Bureaucrat& executor) const; // override
 };
 
 #endif

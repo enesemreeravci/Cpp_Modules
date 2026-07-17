@@ -27,7 +27,7 @@ class AForm
         virtual ~AForm();
 
         void beSigned(const Bureaucrat& b);
-        virtual void execute(const Bureaucrat& executor) const = 0;
+        virtual void execute(const Bureaucrat& executor) const = 0; // pure virtual function, allows us abstraction
 
         const std::string getName() const;
         int getSignGrade() const;

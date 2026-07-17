@@ -4,8 +4,9 @@
 #include <iostream>
 #include <string>
 
-class Form;
-
+class Form; // a class called Form, exists somewhere trust me :D 
+            // it does not know member variables, member functions, object size. only knows the NAME.
+            
 class Bureaucrat
 {
     private:

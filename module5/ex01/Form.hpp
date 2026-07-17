@@ -12,8 +12,8 @@ class Form
     private:    
         const std::string name_f;
         bool isSigned;
-        const int grade_s;
-        const int grade_e;
+        const int grade_s; // required sign grade to sign
+        const int grade_e; // required execute grade to execute
     
     public:
         Form();

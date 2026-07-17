@@ -27,7 +27,7 @@ int main()
         //b2.inc();
         std::cout << "--------------------" << std::endl;
     }
-    catch (const std::exception& e)
+    catch (const std::exception& e) // we can access all derived class with this object.
     {
         std::cout << e.what() << std::endl;
     }

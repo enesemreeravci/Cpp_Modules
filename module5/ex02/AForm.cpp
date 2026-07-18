@@ -75,6 +75,11 @@ const char *AForm::AlreadySignedException::what() const throw()
 {
     return ("Exception: Form is already signed");
 }
+const char *AForm::RunTimeException::what() const throw()
+{
+    return ("Exception: Run Time Error");
+}
+
 void AForm::beSigned(const Bureaucrat& b)
 {
     if(b.getGrade() <= grade_s)

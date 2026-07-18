@@ -71,11 +71,16 @@ const char *AForm::NotSignedException::what() const throw()
 {
     return ("Exception: Grade is not signed");
 }
-
+const char *AForm::AlreadySignedException::what() const throw()
+{
+    return ("Exception: Form is already signed");
+}
 void AForm::beSigned(const Bureaucrat& b)
 {
     if(b.getGrade() <= grade_s)
         isSigned = true;
+    else if(isSigned == true)
+        throw AlreadySignedException();
     else
         throw GradeTooLowException();
 }

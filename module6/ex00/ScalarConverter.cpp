@@ -154,6 +154,7 @@ static void printFloat(double value)
 
     if (std::floor(number) == number)
     {
+        //forces floating-point numbers to be written in fixed-point notation
         std::cout << std::fixed
                   << std::setprecision(1)
                   << number
@@ -184,7 +185,7 @@ static void printDouble(double value)
             std::cout << "+inf" << std::endl;
         return;
     }
-
+            //the largest possible integer value which is less than or equal to value
     if (std::floor(value) == value)
     {
         std::cout << std::fixed

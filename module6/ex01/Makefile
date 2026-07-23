@@ -1,9 +1,9 @@
 NAME = Serialization
 CXX = c++ 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -g3 -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp
-OBJS = $(SRCS:.cpp-.o)
+SRCS = main.cpp Serializer.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 

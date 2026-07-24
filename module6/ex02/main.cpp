@@ -51,36 +51,32 @@ void identify(Base& p)
     try
     {
         (void)dynamic_cast<A&>(p);
-        std::cout << "Object type pointed to by p is: A" << std::endl;
+        std::cout << "A" << std::endl;
         return;
     }
-    catch(std::exception& e)
+    catch (...)
     {
-        std::cout << "Exception caught: " << e.what() << std::endl; 
     }
 
     try
     {
         (void)dynamic_cast<B&>(p);
-        std::cout << "Object type pointed to by p is: B" << std::endl;
+        std::cout << "B" << std::endl;
         return;
     }
-    catch(const std::exception& e)
+    catch (...)
     {
-        std::cerr << "Exception caught: " << e.what() << std::endl;
     }
     
     try
     {
         (void)dynamic_cast<C&>(p);
-        std::cout << "Object type pointed to by p is: C" << std::endl;
+        std::cout << "C" << std::endl;
         return;
     }
-    catch(const std::exception& e)
+    catch (...)
     {
-        std::cerr << "Exception caught: " << e.what() << std::endl;
     }
-    
 }
 
 int main()

@@ -18,42 +18,79 @@ Base* generate(void)
     std::srand(static_cast<unsigned int>(std::time(NULL))); 
     int randomValue = ((std::rand() % 3) + 1);
 
+    std::cout << "Value: " << randomValue << std::endl;
+    
     switch (randomValue)
     {
     case 1:
-        A *obj_a = new A();
-        std::cout << "Class A instance: " << obj_a << std::endl;
-        return obj_a; 
+        std::cout << "Class A instance: " << std::endl;
+        return new A();
     case 2:
-        B *obj_b = new B();
-        std::cout << "Class B instance: " << obj_b << std::endl;
-        return obj_b;
+        std::cout << "Class B instance: " <<  std::endl;
+        return new B();
     case 3:
-        C *obj_c = new C();
-        std::cout << "Class C instance: " << obj_c << std::endl;
-        return obj_c;
+        std::cout << "Class C instance: " << std::endl;
+        return new C();
     }
+    return nullptr;
+}
 
+void identify(Base* p)
+{
+    if(dynamic_cast<A*>(p))
+        std::cout << "Object type pointed to by p is: A" << std::endl;
+    else if(dynamic_cast<B*>(p))
+        std::cout << "Object type pointed to by p is: B" << std::endl;
+    else if(dynamic_cast<C*>(p))
+        std::cout << "Object type pointer to by p is: C" << std::endl;
 
 }
 
+void identify(Base& p)
+{
+    try
+    {
+        (void)dynamic_cast<A&>(p);
+        std::cout << "Object type pointed to by p is: A" << std::endl;
+        return;
+    }
+    catch(std::exception& e)
+    {
+        std::cout << "Exception caught: " << e.what() << std::endl; 
+    }
 
-
-/*
-void identify(Base* p);
-It prints the actual type of the object pointed to by p: "A", "B", or "C".
-*/
-
-/*
-void identify(Base& p);
-It prints the actual type of the object referenced by p: "A", "B", or "C". Using a pointer
-inside this function is forbidden.
-*/
+    try
+    {
+        (void)dynamic_cast<B&>(p);
+        std::cout << "Object type pointed to by p is: B" << std::endl;
+        return;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
+    }
+    
+    try
+    {
+        (void)dynamic_cast<C&>(p);
+        std::cout << "Object type pointed to by p is: C" << std::endl;
+        return;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
+    }
+    
+}
 
 int main()
 {   
-    std::srand(static_cast<unsigned int>(std::time(NULL)));
-    int randomValue = ((std::rand() % 3) + 1);
-    std::cout << randomValue;
+    Base *obj = generate();
+
+    identify(obj);
+    identify(*obj);
+
+    delete obj; 
+
     return 0;
 }

@@ -2,7 +2,7 @@ NAME = Identify
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.cpp Base.cpp
+SRCS = main.cpp Base.cpp A.cpp B.cpp C.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)

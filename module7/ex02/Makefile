@@ -11,6 +11,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	@echo "Compiled $(NAME) successfully"
 
 clean:
 	rm -f $(OBJ)

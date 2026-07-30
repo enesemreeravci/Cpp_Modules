@@ -3,6 +3,7 @@
 #include <ctime>
 #include "Array.hpp"
 
+/*
 void test_empty_array()
 {
 
@@ -22,8 +23,8 @@ void test_empty_array()
 
     try
     {
-        std::cout << "Elements of numbers: " << std::endl;
-        for(int i = 0; i < 10; i++)
+        std::cout << "Elements of numbers: " << std::endl; // it will fill with zeros because of our constructor
+        for(unsigned int i = 0; i < numbers.getSize(); i++)
         {
             std::cout << numbers[i] << " ";
         }
@@ -55,12 +56,118 @@ void test_empty_array()
     }
 }
 
+void test_different_data_types()
+{
+    std::cout << "-----------------------------TESTING WITH DIFFERENT DATA TYPES--------------------------" << std::endl;
+
+    Array<std::string> str;
+    Array<std::string> str2(50);
+    
+    
+    std::cout << "size of str: " << str.getSize() << std::endl;
+    std::cout << "size of str2: " << str2.getSize() << std::endl;
+    
+    Array<std::string> str3 = str2; //copy const called
+
+    try
+    {
+        for(unsigned int i = 0; i < str2.getSize(); i++)
+        {
+            std::cout << str[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+    
+    try
+    {
+        for(unsigned int i = 0; i < str2.getSize(); i++)
+        {
+            str2[i] = "e";
+        }
+        for(unsigned int i = 0; i < str2.getSize(); i++)
+        {
+            std::cout << str2[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "Exception caught: " << e.what() << std::endl; 
+    }
+    
+    Array<double> arrayDouble(10);
+
+    try
+    {
+        std::cout << "Filling arrayDouble with random double values: " << std::endl;
+        std::srand(std::time(NULL));
+        for(unsigned int i = 0; i < arrayDouble.getSize(); i++)
+        {
+            arrayDouble[i] = static_cast<double>(rand() % RAND_MAX);
+        }
+        for(unsigned int i = 0; i < arrayDouble.getSize(); i++)
+        {
+            std::cout << arrayDouble[i] << " " ;
+        }
+        std::cout << std::endl;
+        
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Exception " << e.what() << std::endl;    
+    }
+}
+
+void test_read_and_write_to_array()
+{
+    Array<int> arr(3);
+    Array<int> arr2;
+    try
+    {
+        arr[0] = 1;
+        arr[1] = 2;
+        arr[2] = 3;
+
+        for(unsigned int i = 0; i < arr.getSize(); i++)
+        {
+            std::cout << "arr[i] = " << arr[i] << " ";
+        }
+        std::cout << std::endl;
+        
+        arr2 = arr; // copy constructor
+        for(unsigned int i = 0; i < arr2.getSize(); i++)
+        {
+            arr[i] = i * 10;
+        }
+        for(unsigned int i = 0; i < arr2.getSize(); i++)
+        {
+            std::cout << "arr[i] = " << arr[i] << " ";
+        } 
+        std::cout << std::endl;
+
+        std::cout << arr[4] << std::endl;
+
+        std::cout << "test for catch, this line will not print" << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+
+}
+
 int main()
 {
     test_empty_array();
+    test_different_data_types();
+    //test_read_and_write_to_array();
 }
+*/
 
-/*
 #define MAX_VAL 10
 int main(int, char**)
 {
@@ -72,7 +179,8 @@ int main(int, char**)
         const int value = rand() % 10000;
         numbers[i] = value;
         mirror[i] = value;
-        std::cout <<  value << " ";
+        // to see the values
+        //std::cout <<  value << " "; 
     }
     //SCOPE
     {
@@ -112,4 +220,3 @@ int main(int, char**)
     delete [] mirror;//
     return 0;
 }
-*/

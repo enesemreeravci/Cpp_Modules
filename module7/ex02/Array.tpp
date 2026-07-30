@@ -57,7 +57,7 @@ Array<T>::~Array()
 template<typename T>
 const char* Array<T>::SizeExceedException::what() const throw()
 {
-    return "Index excced the size";
+    return "Index exceeds the size";
 }
 
 template <typename T>

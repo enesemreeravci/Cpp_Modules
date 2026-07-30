@@ -1,22 +1,21 @@
 NAME = Array
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.cpp
-OBJS = $(SRCS:.CPP=.o)
+SRC = main.cpp
+
+OBJ = $(SRC:.cpp=.o)
+
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-	@echo "Compiled $(NAME) successfully"
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
-	rm -rf $(OBJS)
+	rm -f $(OBJ)
 
-fclean:	clean
-	rm -rf $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-re: fclean $(NAME)
-
-.PHONY: all fclean clean re
+re: fclean all

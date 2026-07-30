@@ -16,10 +16,10 @@ Array<T>::Array(unsigned int n) : arr(new T [n]), size(n)
 template <typename T>
 Array<T>::Array(const Array& copy) : arr(0), size(copy.size)
 {
-    if(sizee > 0)
+    if(size > 0)
     {
         arr = new T[size];
-        for(int i = 0; i < size; i++)
+        for(unsigned int i = 0; i < size; i++)
            arr[i] = copy.arr[i];
     }
     std::cout << "Copy constructor called" << std::endl;
@@ -28,15 +28,20 @@ Array<T>::Array(const Array& copy) : arr(0), size(copy.size)
 template <typename T>
 Array<T>& Array<T>::operator=(const Array& rhs)
 {
-    if(this != &other)
+    if(this != &rhs)
     {
         delete[] arr;
 
-        size = other.size;
+        size = rhs.size;
+        arr = NULL;
         if(size > 0)
-            new T[size];
-        for(int i = 0; i < size; i++)
+        {
+            arr = new T[size];
+        }
+        for(unsigned int i = 0; i < size; i++)
+        {
             arr[i] = rhs.arr[i];
+        }
     }
     std::cout << "[Array] copy assignment operator called" << std::endl;
     return *this;
@@ -45,5 +50,37 @@ Array<T>& Array<T>::operator=(const Array& rhs)
 template <typename T>
 Array<T>::~Array()
 {
+    std::cout << "[Array] deconstructor called" << std::endl;
     delete[] arr;
 }
+
+template<typename T>
+const char* Array<T>::SizeExceedException::what() const throw()
+{
+    return "Index excced the size";
+}
+
+template <typename T>
+T& Array<T>::operator[](unsigned int index)
+{
+    if(index >= getSize())
+    {
+        throw Array<T>::SizeExceedException();
+    }
+    return arr[index];
+}
+
+template <typename T>
+const T& Array<T>::operator[](unsigned int index) const
+{
+    if(index >= getSize())
+        throw Array<T>::SizeExceedException();
+    return arr[index];
+}   
+
+template <typename T>
+unsigned int Array<T>::getSize() const
+{
+    return size;
+}
+

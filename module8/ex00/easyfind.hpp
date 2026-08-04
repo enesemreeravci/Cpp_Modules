@@ -14,15 +14,23 @@ class OccurrenceNotFound : public std::exception
 };
 
 template <typename T>
-typename T::iterator easyfind(T& container, const int target)
+typename T::iterator easyfind(T& container, int target)
 {
-    typename T::iterator result;
 
-    result = std::find(container.begin(), container.end(), target);
-
-    if(result == container.end())
-        throw OccurrenceNotFound();
-    return result;
+    for(typename T::iterator it = container.begin(); it != container.end(); it++)
+    {
+        if(*it == target)
+            return it;    
+    }
+    throw OccurrenceNotFound();
 }
+
+    // typename T::iterator result;
+
+    // result = std::find(container.begin(), container.end(), target);
+
+    // if(result == container.end())
+    //     throw OccurrenceNotFound();
+    // return result;
 
 #endif

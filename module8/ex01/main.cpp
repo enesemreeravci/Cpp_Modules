@@ -52,7 +52,7 @@ void test_case_2()
 
 int main()
 {
- 
+    // add more test cases before submit this
     test_case_1();
     test_case_2();
     // Span sp = Span(5);

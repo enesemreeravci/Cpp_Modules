@@ -12,8 +12,8 @@ class Span
         // the subject specifiaclly says the class stores integers.
         std::vector<int> numbers; 
         unsigned int maxSize; // max number for a span object can take
+        Span(void); // will not create an object without number
     public:
-        Span(void);
         Span(unsigned int N);
         Span(const Span& copy);
         Span& operator=(const Span& rhs);

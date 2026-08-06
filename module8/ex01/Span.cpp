@@ -61,13 +61,13 @@ void Span::addNumber(int number)
     numbers.push_back(number);
 }
 
-unsigned int Span::longestSpan()
+unsigned int Span::longestSpan() const
 {
 
     if(numbers.size() < 2)
         throw NotEnoughNumberException();
-    std::vector<int>::iterator minValue;
-    std::vector<int>::iterator maxValue;
+    std::vector<int>::const_iterator minValue;
+    std::vector<int>::const_iterator maxValue;
     minValue = std::min_element(numbers.begin(), numbers.end());
     maxValue = std::max_element(numbers.begin(), numbers.end());    
 
@@ -75,4 +75,26 @@ unsigned int Span::longestSpan()
     //std::cout << "max: " << *maxValue << std::endl;
 
     return (*maxValue -  *minValue);
+}
+
+unsigned int Span::shortestSpan() const
+{
+    if(numbers.size() < 2)
+        throw NotEnoughNumberException();
+    std::vector<int> temp_vec = numbers;
+    std::sort(temp_vec.begin(), temp_vec.end());
+    unsigned int shortest_value = temp_vec[1] - temp_vec[0];
+
+    for(unsigned int i = 2; i < temp_vec.size(); i++)
+    {
+        unsigned int current_span = temp_vec[i] - temp_vec[i - 1];
+        if(current_span < shortest_value)
+            shortest_value = current_span;
+    }
+    return shortest_value;
+}
+
+unsigned int Span::getSize() const
+{
+    return maxSize;
 }

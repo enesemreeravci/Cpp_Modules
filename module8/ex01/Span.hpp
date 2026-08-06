@@ -21,9 +21,10 @@ class Span
         int& operator[](unsigned int index);
 
         void addNumber(int number);
-       // unsigned int shortestSpan();
-        unsigned int longestSpan();
-
+        unsigned int shortestSpan() const;
+        unsigned int longestSpan() const;
+        unsigned int getSize() const;
+        
         class SpanFullException : public std::exception
         {
             virtual const char* what() const throw();

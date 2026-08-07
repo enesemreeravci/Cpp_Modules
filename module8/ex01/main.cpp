@@ -1,6 +1,6 @@
 #include "Span.hpp"
 #include <iostream>
-
+#include <ctime>
 
 void print_Span(Span& span)
 {
@@ -50,21 +50,43 @@ void test_case_2()
     
 }
 
+void test_case_3()
+{
+    try
+    {
+        Span sp_test(10000);
+        std::srand(std::time(NULL));
+        std::vector<int> temp;
+
+        for(unsigned int i = 0; i < 10000; i++)
+        {
+            temp.push_back(std::rand());    
+        }
+        sp_test.addRange(temp.begin(), temp.end());
+        std::cout << "Longest span: " << sp_test.longestSpan() << std::endl;
+        std::cout << "Shortest span: " << sp_test.shortestSpan() << std::endl;
+        //print_Span(sp_test);
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Exception: " << e.what() << std::endl;
+    }
+}
+
 int main()
 {
-    // add more test cases before submit this
-    test_case_1();
-    test_case_2();
-    // Span sp = Span(5);
-    // sp.addNumber(6);
-    // sp.addNumber(3);
-    // sp.addNumber(17);
-    // sp.addNumber(9);
-    // sp.addNumber(11);
-
-    // std::cout << std::endl;
-    // print_Span(sp);
-    // std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
-    // std::cout << "Longest span: " << sp.longestSpan() << std::endl;
-    // return 0;
+    // test_case_1();
+    // test_case_2();
+    // test_case_3();
+    Span sp = Span(5);
+    sp.addNumber(6);
+    sp.addNumber(3);
+    sp.addNumber(17);
+    sp.addNumber(9);
+    sp.addNumber(11);
+    std::cout << std::endl;
+    print_Span(sp);
+    std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << sp.longestSpan() << std::endl;
+    return 0;
 }

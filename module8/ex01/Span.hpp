@@ -38,7 +38,17 @@ class Span
         {
             virtual const char* what() const throw();
         };
+        
+        template<typename iterator>
+        void addRange(iterator first , iterator last)
+        {
+            unsigned int count = std::distance(first, last);
 
+            if(numbers.size() + count > getSize())
+                throw SpanFullException();
+            numbers.insert(numbers.end(), first, last);
+        }
+        
 };
 
 #endif

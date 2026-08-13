@@ -18,21 +18,21 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& rhs)
 
 BitcoinExchange::~BitcoinExchange() {}
 
-static double ConvertValueToDouble(const std::string& ValueStr)
+static bool ConvertValueToDouble(const std::string& ValueStr, double& result)
 {
     std::istringstream iss(ValueStr);
     double converted = 0.0;
     // reads the double and verifies there are no extra trailing characters
     if((iss >> converted) && (iss >> std::ws).eof())
     {
-        return converted;
+        result = converted;
+        return true;
     }
-    //returns 0.0 if the string was not a valid double
-    return 0.0;
+    return false;
+}   
 
-    // i must figure this out, if it fails, func returns 0.0 which is too risky 
-}   //
-bool BitcoinExchange::OpenAndReadTheData(std::string &file) const
+
+bool BitcoinExchange::OpenAndReadTheData(const std::string &file)
 {
     std::ifstream infile(file.c_str());
     if(!infile.is_open())
@@ -42,6 +42,7 @@ bool BitcoinExchange::OpenAndReadTheData(std::string &file) const
     }
     // std::cout << "We opened the file." << std::endl; 
     std::string line;
+    std::getline(infile, line); // this line will read the first row and it will skip the first row before while loop
     while(std::getline(infile, line)) // one line at a time
     {
         std::string::size_type pos;
@@ -53,9 +54,14 @@ bool BitcoinExchange::OpenAndReadTheData(std::string &file) const
         }
         std::string date = line.substr(0, pos);
         std::string value = line.substr(pos + 1); // + 1 for skipping comma
-        ConvertValueToDouble(value);
+        double dValue;
+        if(!ConvertValueToDouble(value, dValue))
+        {
+            std::cerr << "Error: While value converting." << std::endl;
+            return false;
+        }
+
+        dataBase.insert(std::make_pair(date, dValue));
     }
-
     return true;
-
 }

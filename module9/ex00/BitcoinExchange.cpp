@@ -80,6 +80,8 @@ void BitcoinExchange::PrintDataBase() const
     std::cout << "end of printing." << std::endl;
 }
 
+static std::string Trim(const std::string& str);
+
 bool BitcoinExchange::OpenInputFileAndRead(const std::string& userFile)
 {
     std::ifstream userInput(userFile.c_str());
@@ -101,13 +103,22 @@ bool BitcoinExchange::OpenInputFileAndRead(const std::string& userFile)
         }
         std::string date = line.substr(0, pos);
         std::string value = line.substr(pos + 1);
-        std::cout << "[" << date << "]";
-        std::cout << "[" << value << "]" << std::endl;
+        std::string trimmedDate = Trim(date);
+        std::string trimmedValue = Trim(value);
+        std::cout << "[" << trimmedDate << "]";
+        std::cout << "[" << trimmedValue << "]" << std::endl;
     }
     return true;
 }
 
 static std::string Trim(const std::string& str)
 {
-    // here we are
+    const std::string whitespaces = " \t\n\r";
+    size_t start = str.find_first_not_of(whitespaces);
+    if(start == std::string::npos)
+        return "";
+    size_t last = str.find_last_not_of(whitespaces);
+
+    std::string res = str.substr(start, last - start + 1);
+    return res;
 }

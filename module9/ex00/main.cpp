@@ -13,6 +13,10 @@ int main(int argc, char **argv)
     }
     std::string file  = argv[1];
     BitcoinExchange btc;
-    btc.OpenAndReadTheData(file);
+    if(!btc.OpenAndReadTheData("data.csv"))
+        return 1;
+    //btc.PrintDataBase();
+    if(!btc.OpenInputFileAndRead(file))
+        return 1;
     return 0;
 }

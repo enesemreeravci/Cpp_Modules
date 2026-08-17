@@ -19,8 +19,9 @@ class BitcoinExchange
         BitcoinExchange& operator=(const BitcoinExchange& rhs);
         ~BitcoinExchange();
   
-    
+        void PrintDataBase() const; // debugging purposes
         bool OpenAndReadTheData(const std::string& file);
+        bool OpenInputFileAndRead(const std::string& userFile);
 };
 
 #endif

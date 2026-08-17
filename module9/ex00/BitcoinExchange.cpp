@@ -65,3 +65,49 @@ bool BitcoinExchange::OpenAndReadTheData(const std::string &file)
     }
     return true;
 }
+
+void BitcoinExchange::PrintDataBase() const
+{
+    std::map<std::string, double>::const_iterator it;
+
+    it = dataBase.begin();
+    while(it != dataBase.end())
+    {
+        std::cout << it->first << ',';
+        std::cout << it->second << std::endl;
+        ++it;
+    }
+    std::cout << "end of printing." << std::endl;
+}
+
+bool BitcoinExchange::OpenInputFileAndRead(const std::string& userFile)
+{
+    std::ifstream userInput(userFile.c_str());
+    if(!userInput.is_open())
+    {
+        std::cerr << "Error occurred while opening file" << std::endl;
+        return false;
+    }
+    std::string line;
+    std::getline(userInput, line);
+    while(std::getline(userInput, line))
+    {
+        std::string::size_type pos;
+        pos = line.find('|');
+        if(pos == std::string::npos)
+        {
+            std::cerr << "Vertical bar '|' not found." << std::endl;
+            continue;
+        }
+        std::string date = line.substr(0, pos);
+        std::string value = line.substr(pos + 1);
+        std::cout << "[" << date << "]";
+        std::cout << "[" << value << "]" << std::endl;
+    }
+    return true;
+}
+
+static std::string Trim(const std::string& str)
+{
+    // here we are
+}

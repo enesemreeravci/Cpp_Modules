@@ -22,6 +22,7 @@ class BitcoinExchange
         void PrintDataBase() const; // debugging purposes
         bool OpenAndReadTheData(const std::string& file);
         bool OpenInputFileAndRead(const std::string& userFile);
+        bool RateProcessor(const std::string& requestedDate, double& rate);
 };
 
 #endif

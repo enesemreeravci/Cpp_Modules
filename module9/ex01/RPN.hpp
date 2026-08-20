@@ -18,5 +18,7 @@ class RPN
         ~RPN();
 
         bool ProcessExpression(const std::string& expression);
+        bool ApplyOperations(const std::string& op);
+
 };
 #endif

@@ -84,18 +84,20 @@ bool RPN::ProcessExpression(const std::string& expression)
         {
             if(ApplyOperations(token) == false)
             {
-                std::cerr << "Error: " << std::endl;
+                std::cerr << "Error" << std::endl;
                 return false; 
             }  
         }
         else
         {
-            std::cerr << "Error: " << std::endl;
+            std::cerr << "Error" << std::endl;
             return false; 
         }
         
     }
     if(numbers.size() != 1)
         return false;
+    int res = numbers.top();
+    std::cout << res << std::endl;
     return true;
 }

@@ -1,6 +1,8 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(void) {}
+PmergeMe::PmergeMe(void)
+{
+}
 
 PmergeMe::PmergeMe(const PmergeMe& copy)
 {
@@ -19,30 +21,79 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& rhs)
 
 PmergeMe::~PmergeMe() {}
 
-static bool isValidNumber(const std::string& arg)
+static bool isValidNumber(const std::string& str, int& result)
 {
-    if(arg.empty())
+    if(str.empty())
         return false;
-    for(int  i =0; i < arg.size(); i++)
+    for(int i = 0; i < str.size(); i++)
     {
-        if(!isdigit(arg[i]))
+        if(!isdigit(str[i]))
             return false;
     }
-    int value = std::atoi(arg.c_str());
-    if(value >= 0 && value <= 2147483647)
-        return true;
-    return false;
+    std::stringstream ss(str);
+    long value;
+    ss >> value;
+    if(result <= 0 && result >= 2147483647)
+        return false;
+    result = static_cast<int>(value);
+    return true;
 }
 
-bool PmergeMe::Parse(int argc, char **argv)
+bool PmergeMe::ParseInput(int argc, char **argv)
 {
     for(int i = 1; i < argc; i++)
     {
-        std::string arg = argv[1];
-        if(!isValidNumber(arg))
+        int result = 0;
+        std::string arg = argv[i];
+        if(!isValidNumber(arg, result))
             return false;
-        int value = std::atoi(arg.c_str());
-        vector_numbers.push_back(value);
-        deque_numbers.push_back(value);
+        vector_numbers.push_back(result);
+        deque_numbers.push_back(result);
     }
+    return true;
+}
+
+static void printOriginal(const std::vector<int>& vec)
+{
+    std::vector<int>::const_iterator it;
+    
+    std::cout << "Before: " << std::endl;
+    it = vec.begin();
+    while (it != vec.end())
+    {
+        std::cout << *it << " ";
+        ++it;
+    }
+    std::cout << std::endl;
+}
+
+bool PmergeMe::SortVector(const std::vector<int>& vec)
+{
+    size_t size = vec.size();
+    if(size == 0)   
+        return false;
+    std::vector< std::pair<int, int> > paired_vector;
+    bool hasLeftover = false;
+    int leftoverValue = 0;
+    for(size_t i = 0; i + 1 < size; i += 2)
+    {
+        // first is small, second is large
+        int first = vec[i];
+        int second = vec[i + 1];
+        if(first > second)  
+            std::swap(first, second);
+        paired_vector.push_back(std::make_pair(first, second));
+    }
+    if(size % 2 == 1)
+    {
+        hasLeftover = true;
+        leftoverValue = vec[size - 1];
+    }
+
+    std::vector<int> mainChain;
+    for(size_t i = 0; i < paired_vector.size(); i++)
+    {
+        mainChain.push_back(paired_vector[i].second);
+    }
+
 }

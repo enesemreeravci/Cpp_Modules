@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <vector>
 #include <deque>
+#include <sstream>
 
 class PmergeMe
 {
@@ -18,7 +19,8 @@ class PmergeMe
         PmergeMe& operator=(const PmergeMe& rhs);
         ~PmergeMe();
 
-        bool Parse(int argc, char **argv);
+        bool ParseInput(int argc, char **argv);
+        bool SortVector(const std::vector<int>& vec);
 };
 
 #endif

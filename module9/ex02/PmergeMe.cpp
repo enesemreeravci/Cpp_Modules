@@ -1,8 +1,6 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(void)
-{
-}
+PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(const PmergeMe& copy)
 {
@@ -13,7 +11,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& rhs)
 {
     if(this != &rhs)
     {
-        this->vector_numbers = rhs.deque_numbers;
+        this->vector_numbers = rhs.vector_numbers;
         this->deque_numbers = rhs.deque_numbers;
     }
     return *this;
@@ -67,11 +65,11 @@ static void printOriginal(const std::vector<int>& vec)
     std::cout << std::endl;
 }
 
-bool PmergeMe::SortVector(const std::vector<int>& vec)
+std::vector<int> PmergeMe::SortVector(const std::vector<int>& vec)
 {
     size_t size = vec.size();
-    if(size == 0)   
-        return false;
+    if(size <= 1)   
+        return vec;
     std::vector< std::pair<int, int> > paired_vector;
     bool hasLeftover = false;
     int leftoverValue = 0;
@@ -90,10 +88,36 @@ bool PmergeMe::SortVector(const std::vector<int>& vec)
         leftoverValue = vec[size - 1];
     }
 
-    std::vector<int> mainChain;
+    std::vector<int> winners;
     for(size_t i = 0; i < paired_vector.size(); i++)
     {
-        mainChain.push_back(paired_vector[i].second);
+        winners.push_back(paired_vector[i].second);
     }
+    // we recursively sorting larger values into sortedWinners
+    std::vector<int> sortedWinners = SortVector(winners);
 
+    std::vector<std::pair<int, int> > orderedPairs;
+    for(size_t i = 0; i < sortedWinners.size(); i++)
+    {
+        for(size_t j = 0; j < paired_vector.size(); j++)
+        {
+            if(paired_vector[j].second == sortedWinners[i])
+            {
+                orderedPairs.push_back(paired_vector[j]);
+                break;
+            } 
+        }
+    }
+    std::vector<int> mainChain;
+    mainChain.push_back(orderedPairs[0].first);
+    for(size_t i = 0; i < orderedPairs.size(); i++)
+    {
+        mainChain.push_back(orderedPairs[i].second);
+    }
+    
+    std::vector<int> pending;
+    for(size_t i = 1; i < orderedPairs.size(); i++)
+    {
+        pending.push_back(orderedPairs[i].first);
+    }
 }

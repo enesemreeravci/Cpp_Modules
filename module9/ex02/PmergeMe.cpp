@@ -70,7 +70,7 @@ std::vector<int> PmergeMe::SortVector(const std::vector<int>& vec)
     size_t size = vec.size();
     if(size <= 1)   
         return vec;
-    std::vector< std::pair<int, int> > paired_vector;
+    std::vector< std::pair<int, int> > unsortedPairs; // original pair order
     bool hasLeftover = false;
     int leftoverValue = 0;
     for(size_t i = 0; i + 1 < size; i += 2)
@@ -80,7 +80,7 @@ std::vector<int> PmergeMe::SortVector(const std::vector<int>& vec)
         int second = vec[i + 1];
         if(first > second)  
             std::swap(first, second);
-        paired_vector.push_back(std::make_pair(first, second));
+        unsortedPairs.push_back(std::make_pair(first, second));
     }
     if(size % 2 == 1)
     {
@@ -89,35 +89,35 @@ std::vector<int> PmergeMe::SortVector(const std::vector<int>& vec)
     }
 
     std::vector<int> winners;
-    for(size_t i = 0; i < paired_vector.size(); i++)
+    for(size_t i = 0; i < unsortedPairs.size(); i++)
     {
-        winners.push_back(paired_vector[i].second);
+        winners.push_back(unsortedPairs[i].second);
     }
     // we recursively sorting larger values into sortedWinners
     std::vector<int> sortedWinners = SortVector(winners);
 
-    std::vector<std::pair<int, int> > orderedPairs;
+    std::vector<std::pair<int, int> > winnerSortedPairs; // same pairs but reorderes after winners are sorted
     for(size_t i = 0; i < sortedWinners.size(); i++)
     {
-        for(size_t j = 0; j < paired_vector.size(); j++)
+        for(size_t j = 0; j < unsortedPairs.size(); j++)
         {
-            if(paired_vector[j].second == sortedWinners[i])
+            if(unsortedPairs[j].second == sortedWinners[i])
             {
-                orderedPairs.push_back(paired_vector[j]);
+                winnerSortedPairs.push_back(unsortedPairs[j]);
                 break;
             } 
         }
     }
     std::vector<int> mainChain;
-    mainChain.push_back(orderedPairs[0].first);
-    for(size_t i = 0; i < orderedPairs.size(); i++)
+    mainChain.push_back(winnerSortedPairs[0].first);
+    for(size_t i = 0; i < winnerSortedPairs.size(); i++)
     {
-        mainChain.push_back(orderedPairs[i].second);
+        mainChain.push_back(winnerSortedPairs[i].second);
     }
     
     std::vector<int> pending;
-    for(size_t i = 1; i < orderedPairs.size(); i++)
+    for(size_t i = 1; i < winnerSortedPairs.size(); i++)
     {
-        pending.push_back(orderedPairs[i].first);
+        pending.push_back(winnerSortedPairs[i].first);
     }
 }

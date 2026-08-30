@@ -6,6 +6,8 @@
 #include <vector>
 #include <deque>
 #include <sstream>
+#include <climits>
+#include <cctype>
 
 class PmergeMe
 {
@@ -20,7 +22,14 @@ class PmergeMe
         ~PmergeMe();
 
         bool ParseInput(int argc, char **argv);
-        std::vector<int> SortVector(const std::vector<int>& vec);
-};
+        std::vector<int> SortVector(const std::vector<int> &vec);
+        std::vector<size_t> BuildInsertionOrder(size_t pendingSize);
+        size_t Jacobsthal(size_t n);
+        void BinaryInsert(std::vector<int>& mainChain,
+                            int value,
+                            size_t upperBound);
+        void Sort();
+
+    };
 
 #endif

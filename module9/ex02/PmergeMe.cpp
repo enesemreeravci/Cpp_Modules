@@ -60,19 +60,19 @@ bool PmergeMe::ParseInput(int argc, char **argv)
     return true;
 }
 
-// static void printOriginal(const std::vector<int>& vec)
-// {
-//     std::vector<int>::const_iterator it;
+static void printOriginal(const std::vector<int>& vec)
+{
+    std::vector<int>::const_iterator it;
     
-//     std::cout << "Before: " << std::endl;
-//     it = vec.begin();
-//     while (it != vec.end())
-//     {
-//         std::cout << *it << " ";
-//         ++it;
-//     }
-//     std::cout << std::endl;
-// }
+    std::cout << "Before: ";
+    it = vec.begin();
+    while (it != vec.end())
+    {
+        std::cout << *it << " ";
+        ++it;
+    }
+    
+}
 size_t PmergeMe::Jacobsthal(size_t n)
 {
     if(n == 0)
@@ -232,15 +232,34 @@ std::vector<int> PmergeMe::SortVector(const std::vector<int>& vec)
 
     return mainChain;
 }
-
 void PmergeMe::Sort()
 {
+    struct timeval start;
+    struct timeval end;
+
+    gettimeofday(&start, NULL);
+
     std::vector<int> sortedVector = SortVector(vector_numbers);
 
-    // temporary test
-    for (size_t i = 0; i < sortedVector.size(); ++i)
-        std::cout << sortedVector[i] << " ";
+    gettimeofday(&end, NULL);
+
+    double vectorTime =
+        (end.tv_sec - start.tv_sec) * 1000000.0
+        + (end.tv_usec - start.tv_usec);
+
+    printOriginal(vector_numbers);
 
     std::cout << std::endl;
+    std::cout << "After: ";
+    for (size_t i = 0; i < sortedVector.size(); ++i)
+        std::cout << sortedVector[i] << " ";
+    std::cout << std::endl;
+
+    std::cout << "Time to process a range of "
+              << vector_numbers.size()
+              << " elements with std::vector : "
+              << vectorTime
+              << " us"
+              << std::endl;
 }
 

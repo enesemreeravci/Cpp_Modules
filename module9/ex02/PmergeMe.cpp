@@ -232,11 +232,132 @@ std::vector<int> PmergeMe::SortVector(const std::vector<int>& vec)
 
     return mainChain;
 }
+
+void PmergeMe::BinaryInsertDeque(std::deque<int>& mainChain,
+                                 int value,
+                                 size_t upperBound)
+{
+    size_t left = 0;
+    size_t right = upperBound;
+
+    while (left < right)
+    {
+        size_t mid = left + (right - left) / 2;
+
+        if (value < mainChain[mid])
+            right = mid;
+        else
+            left = mid + 1;
+    }
+
+    mainChain.insert(mainChain.begin() + left, value);
+}
+
+std::deque<int> PmergeMe::SortDeque(const std::deque<int>& deq)
+{
+    size_t size = deq.size();
+
+    if (size <= 1)
+        return deq;
+
+    std::deque<std::pair<int, int> > unsortedPairs;
+
+    bool hasLeftover = false;
+    int leftoverValue = 0;
+
+    for (size_t i = 0; i + 1 < size; i += 2)
+    {
+        int first = deq[i];
+        int second = deq[i + 1];
+
+        if (first > second)
+            std::swap(first, second);
+
+        unsortedPairs.push_back(std::make_pair(first, second));
+    }
+
+    if (size % 2 == 1)
+    {
+        hasLeftover = true;
+        leftoverValue = deq[size - 1];
+    }
+
+    std::deque<int> winners;
+
+    for (size_t i = 0; i < unsortedPairs.size(); ++i)
+        winners.push_back(unsortedPairs[i].second);
+
+    std::deque<int> sortedWinners = SortDeque(winners);
+
+    std::deque<std::pair<int, int> > winnerSortedPairs;
+    std::vector<bool> used(unsortedPairs.size(), false);
+
+    for (size_t i = 0; i < sortedWinners.size(); ++i)
+    {
+        for (size_t j = 0; j < unsortedPairs.size(); ++j)
+        {
+            if (!used[j]
+                && unsortedPairs[j].second == sortedWinners[i])
+            {
+                winnerSortedPairs.push_back(unsortedPairs[j]);
+                used[j] = true;
+                break;
+            }
+        }
+    }
+
+    std::deque<int> mainChain;
+
+    mainChain.push_back(winnerSortedPairs[0].first);
+
+    for (size_t i = 0; i < winnerSortedPairs.size(); ++i)
+        mainChain.push_back(winnerSortedPairs[i].second);
+
+    std::deque<int> pending;
+
+    for (size_t i = 1; i < winnerSortedPairs.size(); ++i)
+        pending.push_back(winnerSortedPairs[i].first);
+
+    std::vector<size_t> insertionOrder =
+        BuildInsertionOrder(pending.size());
+
+    for (size_t i = 0; i < insertionOrder.size(); ++i)
+    {
+        size_t pendingIndex = insertionOrder[i];
+
+        int value = pending[pendingIndex];
+
+        int partner =
+            winnerSortedPairs[pendingIndex + 1].second;
+
+        size_t partnerPosition = 0;
+
+        while (partnerPosition < mainChain.size()
+               && mainChain[partnerPosition] != partner)
+        {
+            ++partnerPosition;
+        }
+
+        BinaryInsertDeque(mainChain,
+                          value,
+                          partnerPosition);
+    }
+
+    if (hasLeftover)
+    {
+        BinaryInsertDeque(mainChain,
+                          leftoverValue,
+                          mainChain.size());
+    }
+
+    return mainChain;
+}
 void PmergeMe::Sort()
 {
     struct timeval start;
     struct timeval end;
 
+    // VECTOR
     gettimeofday(&start, NULL);
 
     std::vector<int> sortedVector = SortVector(vector_numbers);
@@ -247,12 +368,26 @@ void PmergeMe::Sort()
         (end.tv_sec - start.tv_sec) * 1000000.0
         + (end.tv_usec - start.tv_usec);
 
+    // DEQUE
+    gettimeofday(&start, NULL);
+
+    std::deque<int> sortedDeque = SortDeque(deque_numbers);
+
+    gettimeofday(&end, NULL);
+
+    double dequeTime =
+        (end.tv_sec - start.tv_sec) * 1000000.0
+        + (end.tv_usec - start.tv_usec);
+
     printOriginal(vector_numbers);
 
     std::cout << std::endl;
+
     std::cout << "After: ";
+
     for (size_t i = 0; i < sortedVector.size(); ++i)
         std::cout << sortedVector[i] << " ";
+
     std::cout << std::endl;
 
     std::cout << "Time to process a range of "
@@ -261,5 +396,11 @@ void PmergeMe::Sort()
               << vectorTime
               << " us"
               << std::endl;
-}
 
+    std::cout << "Time to process a range of "
+              << deque_numbers.size()
+              << " elements with std::deque : "
+              << dequeTime
+              << " us"
+              << std::endl;
+}

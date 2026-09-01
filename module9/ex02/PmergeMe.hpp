@@ -29,6 +29,11 @@ class PmergeMe
         void BinaryInsert(std::vector<int>& mainChain,
                             int value,
                             size_t upperBound);
+
+        std::deque<int> SortDeque(const std::deque<int>& deq);
+        void BinaryInsertDeque(std::deque<int>& mainChain,
+                       int value,
+                       size_t upperBound);
         void Sort();
 
     };
